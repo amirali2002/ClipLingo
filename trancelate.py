@@ -6,7 +6,7 @@ from pystray import Icon, Menu, MenuItem
 from PIL import Image, ImageDraw
 import os
 
-# دیکشنری حروف و ترکیب‌های دوحرفی
+
 word_map = {
     "a": "ا",
     "e": "ه",
@@ -16,7 +16,7 @@ word_map = {
     "d": "د",
     "f": "ف",
     "g": "گ",
-    "h": "ه",
+    "h": "ح",
     "i": "ی",
     "j": "ج",
     "k": "ک",
@@ -39,6 +39,10 @@ word_map = {
     "th": "ث",
     "ph": "ف",
     "ea": "ع",
+    "slm": "سلام ",
+    "mn": "من ",
+    "hasan": "حسن",
+    "mmd": "ممد",
     " ": " ",
     ",": ",",
     ".": ".",
@@ -52,10 +56,11 @@ word_map = {
     "8": "۸",
     "9": "۹",
     "0": "۰",
+    "apple":"apple",
 }
 
 is_active = True
-icon = None  # آبجکت آیکن tray جهانی
+icon = None 
 
 def create_indicator_window():
     global indicator_window, canvas, oval
@@ -120,10 +125,8 @@ def toggle_text(item):
     return "خاموش" if is_active else "روشن"
 
 def create_icon_image(color):
-    # ساخت تصویر مربع 64x64 با رنگ داده شده
     image = Image.new("RGB", (64, 64), color)
     draw = ImageDraw.Draw(image)
-    # یک دایره زرد یا نارنجی وسط بکش (اختیاری برای زیبایی)
     draw.ellipse((10,10,54,54), fill=color)
     return image
 
@@ -131,8 +134,7 @@ def toggle_action(icon_obj, item):
     global is_active, icon
     is_active = not is_active
     print("وضعیت:", "فعال ✅" if is_active else "غیرفعال ❌")
-    # تغییر آیکن بر اساس وضعیت
-    new_color = (255, 255, 0) if is_active else (255, 165, 0)  # زرد یا نارنجی
+    new_color = (255, 255, 0) if is_active else (255, 165, 0) 
     icon.icon = create_icon_image(new_color)
     icon.update_menu()
 
